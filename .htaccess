@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. If the user requests a real directory, let Apache serve it
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # 2. If the user requests a real file (like an image or CSS), let Apache serve it
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # 3. If it's NOT a real file or directory, send the request to index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
