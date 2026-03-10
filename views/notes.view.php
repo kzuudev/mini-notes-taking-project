@@ -6,11 +6,11 @@
     <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
         <?php foreach ($notes as $note) : ?>
             <ul>
-               <li>
+                <li>
                     <a href="note?id=<?= $note['id'] ?> ">
-                        <?= $note['title'] ?>
+                        <?= htmlspecialchars($note['title']) ?>
                     </a>
-               </li>
+                </li>
             </ul>
         <?php endforeach; ?>
 

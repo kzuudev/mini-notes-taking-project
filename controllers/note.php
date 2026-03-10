@@ -8,7 +8,7 @@ $heading = "Note";
 
 $id = $_GET['id'];
 $query = "select * from notes where id = :id";
-$currentUserId = 1;
+$currentUserId = 3;
 
 $note = $db->query($query, ['id' => $id])->findOrFail();
 
