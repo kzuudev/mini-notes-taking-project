@@ -1,19 +1,12 @@
 <?php
 
+require 'routes.php';
 $raw_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 
 $uri = str_replace('/notes-mini', '', $raw_uri);
 // var_dump($uri);
 // echo "<br>";
-
-$routes = [
-    '/' => 'controllers/index.php',
-    '/about' => 'controllers/about.php',
-    '/notes' => 'controllers/notes.php',
-    '/note'  => 'controllers/note.php',
-    '/contact' => 'controllers/contact.php',
-];
 
 
 // var_dump(array_keys($routes));
