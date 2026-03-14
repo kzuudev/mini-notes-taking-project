@@ -1,0 +1,36 @@
+<?php
+
+use Core\Response;
+
+function urlIs($value)
+{
+    $raw_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+
+    $uri = str_replace('/notes-mini', '', $raw_uri);
+    // var_dump($uri);
+
+    return $uri === $value;
+}
+
+
+function authorize($condition, $status = Response::FORBIDDEN)
+{
+
+    if (! $condition) {
+        abort($status);
+    }
+}
+
+function base_path($path)
+{
+
+    return BASE_PATH . $path;
+}
+
+
+function view($path, $attributes = [])
+{
+    extract($attributes);
+    require base_path('views/' . $path);
+}

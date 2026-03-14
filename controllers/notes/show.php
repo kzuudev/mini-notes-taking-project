@@ -1,6 +1,8 @@
 <?php
 
-$config = require('config.php');
+use Core\Database;
+
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
 
@@ -24,4 +26,8 @@ authorize($note['user_id'] === $currentUserId);
 //     abort(Response::FORBIDDEN);
 // }
 
-require "views/note.view.php";
+
+view('notes/show.view.php', [
+    'heading' => $heading,
+    'note' => $note,
+]);
