@@ -53,8 +53,6 @@ class Router
 
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
 
-//        var_dump($this->routes);
-
         return $this->routes;
     }
 
@@ -63,20 +61,11 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                Middleware::resolve($route['middleware']);
 
                 return require base_path($route['controller']);
             }
-//
-//            if($route['middleware'] === 'guest') {
-//                (new Guest())->handle();
-//
-//            }
-//
-//            if($route['middleware'] === 'auth') {
-//                (new Auth())->handle();
-//            }
 
-            Middleware::resolve($route['middleware']);
         }
 
         $this->abort();

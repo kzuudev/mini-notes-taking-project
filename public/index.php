@@ -2,6 +2,10 @@
 
 session_start();
 
+//echo "<pre>";
+//
+//// Step 3: Dump the ENTIRE box to see everything inside
+//var_dump($_SESSION);
 const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . 'Core/functions.php';

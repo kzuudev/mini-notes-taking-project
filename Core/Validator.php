@@ -30,6 +30,14 @@ class Validator
 
     }
 
+    public static function emailLogin($value) {
+
+        $input = trim($value);
+
+        return filter_var($input, FILTER_VALIDATE_EMAIL) !== false;
+
+    }
+
     public static function password($value, $min = 1, $max = INF) {
 
         $input = trim($value);

@@ -24,9 +24,6 @@ class Database
 
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // $stmt = $this->connection->prepare($query);
-        // $stmt->execute($params);
-
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($params);
 

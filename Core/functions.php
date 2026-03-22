@@ -44,3 +44,7 @@ function view($path, $attributes = [])
     extract($attributes);
     require base_path('views/' . $path);
 }
+
+function login($user) {
+    $_SESSION['user'] = $user['email'];
+}

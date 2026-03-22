@@ -8,6 +8,7 @@ use Core\App;
 
 
 $db = App::resolve(Database::class);
+
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -24,9 +25,10 @@ if (! Validator::email($_POST['email'], 1, 20)) {
     $errors['email'] = 'Email is required and can not be more than 20 characters.';
 }
 
-if (! Validator::password($_POST['password'], 1, 30)) {
 
-    $errors['password'] = "Password is required and can not be less than 30 characters.";
+if (! Validator::password($_POST['password'], 1, 15)) {
+
+    $errors['password'] = "Password is required and can not be less than 15 characters.";
 }
 
 if (! empty($errors)) {
@@ -51,22 +53,19 @@ if($user) {
     $db->query("INSERT into users(name, email, password) VALUES (:name, :email, :password)", [
         'name' => $name,
         'email' => $email,
-        'password' => $password,
+        'password' => password_hash($password, PASSWORD_BCRYPT),
     ]);
 
-    $_SESSION['user'] = [
-        'id' => $user['id'],
-        'name' => $user['name'],
-        'email' => $user['email'],
-    ];
+//    $_SESSION['user'] = [
+//        'name' => $name,
+//        'email' => $email,
+//    ];
+
+    login([
+        'email' => $email,
+    ]);
 }
 
-// If there's no error insert it to the database.
-//if(empty($errors)) {
-//
-//    $sql = "INSERT into users(name, email, password) VALUES (:name, :email, :password)";
-//
-//}
 
 
 
