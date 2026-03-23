@@ -18,7 +18,7 @@
                                    placeholder="Email address">
 
                             <?php if (isset($errors['email'])) : ?>
-                                <li class="text-red-500 text-xs mt-2"><?= $errors['email'] ?></li>
+                                <li class="list-none text-red-500 text-xs my-2"><?= $errors['email'] ?></li>
                             <?php endif; ?>
                         </div>
 
@@ -29,7 +29,7 @@
                                    placeholder="Password">
 
                             <?php if (isset($errors['password'])) : ?>
-                                <li class="text-red-500 text-xs mt-2"><?= $errors['password'] ?></li>
+                                <li class="list-none text-red-500 text-xs my-2"><?= $errors['password'] ?></li>
                             <?php endif; ?>
                         </div>
                     </div>
