@@ -10,8 +10,6 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-
-
 $id = $_POST['id'];
 $query = "select * from notes where id = :id";
 $currentUserId = 1;

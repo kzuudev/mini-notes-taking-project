@@ -21,5 +21,6 @@ $router->patch('/register/update', 'controllers/registration/update.php');
 
 $router->get('/login', 'controllers/sessions/create.php')->only('guest');;
 $router->post('/sessions/create', 'controllers/sessions/store.php')->only('guest');
+$router->delete('/sessions/destroy', 'controllers/sessions/destroy.php')->only('auth');
 
 

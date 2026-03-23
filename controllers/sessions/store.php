@@ -32,9 +32,6 @@ $user = $db->query("select * from users where email = :email", [
     'email' => $email
 ])->find();
 
-//var_dump($user);
-
-
 if(! $user) {
     return view('sessions/create.view.php', [
         'errors' => [
