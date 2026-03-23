@@ -22,15 +22,8 @@ class Validator
         return strlen($input) >= $min && strlen($input) <= $max;
     }
 
-    public static function email($value, $min = 1, $max = INF) {
 
-        $input = trim($value);
-
-        return filter_var($input, FILTER_VALIDATE_EMAIL) !== false;
-
-    }
-
-    public static function emailLogin($value) {
+    public static function email($value) {
 
         $input = trim($value);
 

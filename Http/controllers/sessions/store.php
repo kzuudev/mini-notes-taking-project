@@ -13,7 +13,7 @@ $password = $_POST['password'];
 
 $errors = [];
 
-if (! Validator::emailLogin($email)) {
+if (! Validator::email($email)) {
     $errors['email'] = 'Please provide a valid email address.';
 }
 
@@ -41,7 +41,7 @@ if(! $user) {
 }
 
 // we have a user, but we don't know if the password provided matches what we have in the database
-if(! password_verify($password, $user['password']  )) {
+if(! password_verify($password, $user['password'])) {
     return view('sessions/create.view.php', [
         'errors' => [
             'password' => 'The password you provided is incorrect.'

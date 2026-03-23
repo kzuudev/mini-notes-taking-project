@@ -21,7 +21,7 @@ if (! Validator::string($_POST['name'], 1, 20)) {
     $errors['name'] = 'Name is required and can not be more than 20 characters.';
 }
 
-if (! Validator::email($_POST['email'], 1, 20)) {
+if (! Validator::string($_POST['email'], 1, 20)) {
     $errors['email'] = 'Email is required and can not be more than 20 characters.';
 }
 
