@@ -15,18 +15,21 @@ $db = App::resolve(Database::class);
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-
+// it validate the input in the form first.
 if($form->validate($email, $password)) {
-    if($auth->attempt($email, $password)) {
+    // then, if it validate try to authenticate it
+    if ($auth->attempt($email, $password)) {
         redirect('/');
     }
 
-    $form->hasErrors('email', 'No matching credentials found for that email address and password.');
+    $form->hasError('email', 'No matching credentials found for that email address and password.');
+
 }
 
 return view('sessions/create.view.php', [
     'errors' => $form->errors()
 ]);
+
 
 
 

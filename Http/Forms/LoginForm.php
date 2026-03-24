@@ -9,6 +9,7 @@ class LoginForm {
 
     protected $errors = [];
 
+    // for validating login form
     public function validate($email, $password) {
 
         if(! Validator::email($email)) {
@@ -23,13 +24,15 @@ class LoginForm {
 
     }
 
+
     // getters for the errors
     public function errors() {
 
         return $this->errors;
     }
 
-    public function hasErrors($field, $message) {
+    // return specific error field
+    public function hasError($field, $message) {
 
         return $this->errors[$field] = $message;
     }
