@@ -4,6 +4,7 @@
 use Core\App;
 use Core\Database;
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 $form = new LoginForm();
@@ -26,9 +27,19 @@ if($form->validate($email, $password)) {
 
 }
 
-return view('sessions/create.view.php', [
-    'errors' => $form->errors()
-]);
+// created an session errors that contains login form errors
+//$_SESSION['errors'] = $form->errors();
+
+//$_SESSION['_flash']['errors'] = $form->errors();
+
+
+Session::flash('errors', $form->errors());
+
+return redirect('/login');
+
+//return view('sessions/create.view.php', [
+//    'errors' => $form->errors()
+//]);
 
 
 

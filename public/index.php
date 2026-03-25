@@ -1,11 +1,8 @@
 <?php
 
-session_start();
+use Core\Session;
 
-//echo "<pre>";
-//
-//// Step 3: Dump the ENTIRE box to see everything inside
-//var_dump($_SESSION);
+session_start();
 const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . 'Core/functions.php';
@@ -29,3 +26,8 @@ $uri = str_replace('/notes-mini', '', $raw_uri);
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
+
+
+//unset($_SESSION['_flash']);
+
+Session::unflash();

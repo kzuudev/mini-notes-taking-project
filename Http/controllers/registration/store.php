@@ -32,14 +32,13 @@ if($register->validate($name, $email, $password)) {
 
         $register->hasError('email', 'An account with this email already exists.');
 
-        // 2. Stop executing and return the view with ALL errors
+        //Stop executing and return the view with ALL errors
         return view('registration/create.view.php', [
             'errors' => $register->errors()
         ]);
 
 
     }
-
 
     //If not, save one to the database, and then log the user in, and redirect.
     $db->query("INSERT into users(name, email, password) VALUES (:name, :email, :password)", [
@@ -51,37 +50,12 @@ if($register->validate($name, $email, $password)) {
     redirect("/login");
 
 
-
-
 }
 
 return view('registration/create.view.php', [
     'errors' => $register->errors()
 ]);
 
-//if($user) {
-//    // then if someone with that email already exists and has an account.
-//    // if yes, redirect to login page
-//    header('location: /');
-//    exit();
-//}else {
-//
-//    //If not, save one to the database, and then log the user in, and redirect.
-//    $db->query("INSERT into users(name, email, password) VALUES (:name, :email, :password)", [
-//        'name' => $name,
-//        'email' => $email,
-//        'password' => password_hash($password, PASSWORD_BCRYPT),
-//    ]);
-//
-////    $_SESSION['user'] = [
-////        'name' => $name,
-////        'email' => $email,
-////    ];
-//
-//    login([
-//        'email' => $email,
-//    ]);
-//}
 
 
 
