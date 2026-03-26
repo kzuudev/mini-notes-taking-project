@@ -8,10 +8,9 @@ namespace Core;
 class Session {
 
 
-    // return existing session key
+    // return existing session key (array)
     public static function has($key) {
-
-        return isset($_SESSION[$key]);
+        return (bool) static::get($key);
     }
 
     // input a new array in Session
@@ -21,29 +20,33 @@ class Session {
 
     // get existing array in Session
     public static function get($key) {
-        return $_SESSION[$key] ?? null;
+        return $_SESSION['_flash'][$key] ?? $_SESSION[$key] ?? null;
     }
 
 
     // setting up the session I want to flash
     public static function flash($key, $value) {
-        $_SESSION[$key] = $value;
+        $_SESSION['_flash'][$key] = $value;
 
     }
 
-    // to delete/expire/flash the session
+    // to delete/expire/flash the entire session
     public static function unflash() {
         unset($_SESSION['_flash']);
     }
 
+
+    // Empty the entire session
     public static function flush() {
 
         $_SESSION = [];
     }
 
 
+    // destroy session
     public static function destroy() {
         static::flush();
+
 
         session_destroy();
 

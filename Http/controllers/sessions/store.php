@@ -20,6 +20,9 @@ $password = $_POST['password'];
 if($form->validate($email, $password)) {
     // then, if it validate try to authenticate it
     if ($auth->attempt($email, $password)) {
+        Session::put('user', [
+            'email' => $email
+        ]);
         redirect('/');
     }
 
@@ -27,19 +30,10 @@ if($form->validate($email, $password)) {
 
 }
 
-// created an session errors that contains login form errors
-//$_SESSION['errors'] = $form->errors();
-
-//$_SESSION['_flash']['errors'] = $form->errors();
-
-
 Session::flash('errors', $form->errors());
 
 return redirect('/login');
 
-//return view('sessions/create.view.php', [
-//    'errors' => $form->errors()
-//]);
 
 
 
