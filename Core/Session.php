@@ -43,6 +43,8 @@ class Session {
     }
 
 
+
+
     // destroy session
     public static function destroy() {
         static::flush();

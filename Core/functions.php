@@ -44,6 +44,10 @@ function redirect($path)
     exit();
 }
 
+function old($key) {
+    return Core\Session::get('old')[$key] ?? '';
+}
+
 function view($path, $attributes = [])
 {
     extract($attributes);
