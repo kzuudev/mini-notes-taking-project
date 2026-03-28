@@ -1,25 +1,32 @@
 <?php
 
-
+namespace Http\Controllers\Sessions;
 use Core\App;
 use Core\Database;
 use Core\Authenticator;
 use Core\Session;
+use Core\ValidationException;
 use Http\Forms\LoginForm;
-
-$form = new LoginForm();
-$auth = new Authenticator();
-
-
-$db = App::resolve(Database::class);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+$db = App::resolve(Database::class);
 
-// it validate the input in the form first.
-if($form->validate($email, $password)) {
-    // then, if it validate try to authenticate it
-    if ($auth->attempt($email, $password)) {
+
+
+$auth = new Authenticator();
+
+//$form = new LoginForm();
+
+try {
+    // it validates the input in the form first.
+    $form = LoginForm::validate($attributes = [
+        'email' => $email,
+        'password' => $password
+    ]);
+
+    // then, if it's validated try to authenticate it
+    if ($auth->attempt($attributes['email'], $attributes['password'])) {
         Session::put('user', [
             'email' => $email
         ]);
@@ -27,14 +34,19 @@ if($form->validate($email, $password)) {
     }
 
     $form->hasError('email', 'No matching credentials found for that email address and password.');
+    ValidationException::throw($form->errors(), $form->attributes);
 
+
+}catch (ValidationException $exception) {
+
+    Session::flash('errors', $exception->errors);
+    Session::flash('old', $exception->oldAttributes);
+
+    return redirect('/login');
 }
 
 
-Session::flash('errors', $form->errors());
-Session::flash('old', [
-    'email' => $email
-]);
+
 
 
 return redirect('/login');
