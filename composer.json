@@ -1,0 +1,16 @@
+{
+    "name": "johnkevin/notes-mini",
+    "authors": [
+        {
+            "name": "kzuudev",
+            "email": "kzuudev@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    }
+}

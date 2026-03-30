@@ -16,40 +16,27 @@ $db = App::resolve(Database::class);
 
 $auth = new Authenticator();
 
-//$form = new LoginForm();
 
-try {
-    // it validates the input in the form first.
-    $form = LoginForm::validate($attributes = [
+// it validates the input in the form first.
+$form = LoginForm::validate($attributes = [
         'email' => $email,
         'password' => $password
-    ]);
+]);
 
-    // then, if it's validated try to authenticate it
-    if ($auth->attempt($attributes['email'], $attributes['password'])) {
-        Session::put('user', [
-            'email' => $email
-        ]);
-        redirect('/');
-    }
+// then, if it's validated try to authenticate it
+$attemptSignedIn = $auth->attempt($attributes['email'], $attributes['password']);
 
+if(! $attemptSignedIn) {
     $form->hasError('email', 'No matching credentials found for that email address and password.');
     ValidationException::throw($form->errors(), $form->attributes);
-
-
-}catch (ValidationException $exception) {
-
-    Session::flash('errors', $exception->errors);
-    Session::flash('old', $exception->oldAttributes);
-
-    return redirect('/login');
 }
 
+// it it's authenticated, create a session user for authentication and return it in home page
+Session::put('user', [
+    'email' => $email
+]);
+redirect('/');
 
-
-
-
-return redirect('/login');
 
 
 

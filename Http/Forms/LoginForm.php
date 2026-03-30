@@ -35,15 +35,16 @@ class LoginForm {
     // creating a new instance
     $instance = new static($attributes);
 
-    // if the validation failed
-    if($instance->failed()) {
-        ValidationException::throw($instance->errors(), $instance->attributes);
-    }
-
-    // if it's success return the instance
-    return $instance;
+    // check if the validation failed and if it's success return the instance
+    return $instance->failed() ? $instance->throw() : $instance;
 
     }
+
+    // throw a customize error exception
+    public function throw() {
+        ValidationException::throw($this->errors(), $this->attributes);
+    }
+
 
 
     // check if there's an error occur
@@ -62,7 +63,10 @@ class LoginForm {
     // return specific error field
     public function hasError($field, $message) {
 
-        return $this->errors[$field] = $message;
+        $this->errors[$field] = $message;
+
+        return $this;
+
     }
 
 
